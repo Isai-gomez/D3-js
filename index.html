@@ -6,11 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="https://d3js.org/d3.v5.min.js"></script>
+    <style>
+        .color:hover{
+            fill: red;
+
+        }
+    
+    </style>
     
 
 </head>
 <body>
-    <svg></svg>
+    
     <script>
       const dataset = [
                   [ 34,     78 ],
@@ -48,7 +55,8 @@
        .append("circle")
        .attr("cx", (d) => xScale(d[0]))
        .attr("cy",(d) => yScale(d[1]))
-       .attr("r", (d) => 5);
+       .attr("r", (d) => 5)
+       .attr("class", "color")
 
     svg.selectAll("text")
        .data(dataset)
