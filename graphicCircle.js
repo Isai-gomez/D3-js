@@ -10,25 +10,26 @@ const dataset = [
     [ 78,    320 ],
     [ 21,   123 ]
   ];
-
+//Tamaño del svg
 const w = 500;
 const h = 500;
 const padding = 60;
 
+//Escala en el eje x
 const xScale = d3.scaleLinear()
-       .domain([0, d3.max(dataset, (d) => d[0])])
-       .range([padding, w - padding]);
+       .domain([0, d3.max(dataset, (d) => d[0])])// entrada de 0 al 420
+       .range([padding, w - padding]);// mapea la entrada entre 60 y 440
 
 const yScale = d3.scaleLinear()
-       .domain([0, d3.max(dataset, (d) => d[1])])
-       .range([h - padding, padding]);
+       .domain([0, d3.max(dataset, (d) => d[1])])//entrada de 0 a 411
+       .range([h - padding, padding]);// mapea la entrada entre 440 y 60
 
-const svg = d3.select("body")
+const svg = d3.select("body")// añadir al body un svg de 500x500
     .append("svg")
     .attr("width", w)
     .attr("height", h);
 
-svg.selectAll("circle")
+svg.selectAll("circle")//añadir circulos al svg por cada dato, serian 10
 .data(dataset)
 .enter()
 .append("circle")
@@ -41,7 +42,7 @@ svg.selectAll("text")
 .data(dataset)
 .enter()
 .append("text")
-.text((d) =>  (d[0] + "," + d[1]))
+.text((d) =>  (`${d[0]},${d[1]}`))
 .attr("x", (d) => xScale(d[0] + 10))
 .attr("y", (d) => yScale(d[1]))
 
