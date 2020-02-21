@@ -3,20 +3,22 @@ const url_api =
 
 const h = 1000;
 const w = 1000;
-const dataJson = { dato: null };
 
 (async function(url) {
   let response = await fetch(url);
   let data = await response.json();
   console.log(data);
-  const svg = d3
+  const div = d3
     .select("body")
-    .append("svg")
+    .append("div")
     .attr("width", w)
     .attr("height", h);
-  svg
-    .selectAll("rect")
+  div
+    .selectAll("div")
     .data(data.data)
     .enter()
-    .append("rect");
+    .append("div")
+    .style("width", "2.8px")
+    .style("height", d => `${d[1]}px`)
+    .attr("class", "bar");
 })(url_api);
