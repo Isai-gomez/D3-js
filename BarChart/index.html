@@ -15,18 +15,45 @@
   </head>
   <body>
     <script>
-      const dataset = [45, 99, 23, 45, 48, 31, 34, 14, 34];
-      const fruits = [
-        "Mango",
-        "Uva",
-        "Piña",
-        "Melon",
-        "Manzana",
-        "Fresa",
-        "Sandia",
-        "Naranja",
-        "Pera"
+      const dataset = [
+        {
+          fruit: "Mango",
+          value: 45
+        },
+        {
+          fruit: "Uva",
+          value: 99
+        },
+        {
+          fruit: "Piña",
+          value: 23
+        },
+        {
+          fruit: "Melon",
+          value: 45
+        },
+        {
+          fruit: "Manzana",
+          value: 45
+        },
+        {
+          fruit: "Fresa",
+          value: 48
+        },
+        {
+          fruit: "Sandia",
+          value: 31
+        },
+        {
+          fruit: "Naranja",
+          value: 34
+        },
+        {
+          fruit: "Pera",
+          value: 14
+        }
       ];
+      const fruits = [];
       const m = 60;
       const w = 1000 - 2 * m;
       const h = 600 - 2 * m;
@@ -48,13 +75,24 @@
 
       const xScale = d3
         .scaleBand()
-        .domain(fruits.map(fruit => fruit))
+        .domain(dataset.map(p => p.fruit))
         .range([0, w])
         .padding(0.2);
       chart
         .append("g")
         .attr("transform", `translate(0, ${h})`)
         .call(d3.axisBottom(xScale));
+      chart
+        .selectAll()
+        .data(dataset)
+        .enter()
+        .append("rect")
+        .attr("x", s => xScale(s.fruit))
+        .attr("y", s => yScale(s.value))
+        .attr("height", s => h - yScale(s.value))
+        .attr("width", xScale.bandwidth());
+      // .attr("x", (actual, index, array) => xScale(actual.value));
+
       //   svg
       //     .selectAll("rect")
       //     .data(dataset)
