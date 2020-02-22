@@ -18,8 +18,8 @@ const barpadding = 3;
     .data(data.data)
     .enter()
     .append("rect")
-    .attr("width", (d, i) => `${i + 4}px`)
-    .attr("height", d => `${d[1]}px`)
-    .attr("x", (d, i) => `${i + 8}`)
-    .attr("y", d => `${h - d[1]}`);
+    .attr("x", (d, i) => `${i * (w / d.length)}px`)
+    .attr("y", (d, i) => `${h - 10 * d[1]}`)
+    .attr("width", w / data.data.length - barpadding)
+    .attr("height", d => `${d[1] * 10}`);
 })(url_api);
