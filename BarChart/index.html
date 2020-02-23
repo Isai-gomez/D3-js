@@ -82,6 +82,9 @@
       text.source {
         font-size: 10px;
       }
+      .color:hover {
+        fill: rgba(181, 202, 243, 0.466);
+      }
     </style>
   </head>
   <body>
@@ -167,7 +170,9 @@
         .attr("x", s => xScale(s.fruit))
         .attr("y", s => yScale(s.value))
         .attr("height", s => h - yScale(s.value))
-        .attr("width", xScale.bandwidth());
+        .attr("width", xScale.bandwidth())
+        .attr("class", "color")
+        .text(d => d.value);
 
       chart
         .append("g")
@@ -191,6 +196,20 @@
             .tickSize(-w, 0, 0)
             .tickFormat("")
         );
+      svg
+        .append("text")
+        .attr("x", -(h / 2) - m)
+        .attr("y", m / 2.4)
+        .attr("transform", "rotate(-90)")
+        .attr("text-anchor", "middle")
+        .text("Medido en (%)");
+
+      svg
+        .append("text")
+        .attr("x", w / 2 + m)
+        .attr("y", 40)
+        .attr("text-anchor", "middle")
+        .text("Frutas más comunes en el 2019");
     </script>
   </body>
 </html>
